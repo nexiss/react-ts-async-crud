@@ -17,8 +17,10 @@ export function useCRUD<T = unknown, Z = unknown>({
     addElementRequest,
     removeElementRequest,
     updateElementRequest,
+    removeAllElementsRequest,
     fetchDataRequest,
   } = api;
+
   const { addRequest, removeRequest, isNotEmpty } = manager;
 
   // Reusable functions
@@ -48,9 +50,22 @@ export function useCRUD<T = unknown, Z = unknown>({
     const requestId = addRequest();
     removeElementRequest<U>(id)
       .then(() => {
-        console.log("asdfasdf");
         removeRequest(requestId);
         // Check response and fetch data again if everything was OK
+        return fetch();
+      })
+      .catch((error: Error) => {
+        removeRequest(requestId);
+        updateStatusWith({ error });
+      });
+  };
+
+  const clear = () => {
+    const requestId = addRequest();
+    removeAllElementsRequest()
+      .then(() => {
+        removeRequest(requestId);
+
         return fetch();
       })
       .catch((error: Error) => {
@@ -87,5 +102,5 @@ export function useCRUD<T = unknown, Z = unknown>({
       });
   };
 
-  return { ...status, loading: isNotEmpty, add, remove, update, fetch };
+  return { ...status, loading: isNotEmpty, add, remove, clear, update, fetch };
 }

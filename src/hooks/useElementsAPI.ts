@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Element, ElementId } from "../types";
+import { API, Element, ElementId } from "../types";
 
 // Abstraction to reduce code
 const doReject = (reject: (reason: Error) => void, message: string) => {
@@ -16,7 +16,7 @@ type Props = {
 
 const DEFAULT_PROPS: Props = { withErrors: false, delay: 1000 };
 
-export function useElementsAPI(props?: Props) {
+export function useElementsAPI(props?: Props): API<Element, Element[]> {
   const { withErrors, delay } = { ...DEFAULT_PROPS, ...props };
 
   const [elements, setElements] = useState([] as Element[]);
@@ -79,6 +79,20 @@ export function useElementsAPI(props?: Props) {
     });
   };
 
+  const removeAllElementsRequest = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (withErrors) {
+          doReject(reject, "Something went wrong when removing all elements");
+        } else {
+          console.log("Removing all elements", "(" + elements.length + ")");
+          setElements([]);
+          resolve();
+        }
+      }, delay);
+    });
+  };
+
   // Not sure why useRef + useEffect is needed for the fetchDataRequest to work propertly
   const ref = useRef(elements);
   useEffect(() => {
@@ -101,6 +115,7 @@ export function useElementsAPI(props?: Props) {
   return {
     addElementRequest,
     removeElementRequest,
+    removeAllElementsRequest,
     updateElementRequest,
     fetchDataRequest,
   };
