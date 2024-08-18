@@ -38,11 +38,13 @@ export function StateComponent({ settings, api, manager }: Props) {
         {loading ? <LinearProgress /> : "false"}
       </Box>
 
-      <Box>
-        <Typography mt={2}>
-          Error: &nbsp;<span>{JSON.stringify(error?.message)}</span>
-        </Typography>
-      </Box>
+      {error?.message ? (
+        <Box>
+          <Typography mt={2}>
+            Error: &nbsp;<span>{JSON.stringify(error?.message)}</span>
+          </Typography>
+        </Box>
+      ) : null}
 
       {loading && hideResults ? (
         <></>
