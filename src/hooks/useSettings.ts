@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Settings } from "../types";
+import { Settings } from '../types';
 
 export function useSettings() {
   return useState<Settings>({

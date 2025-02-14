@@ -1,9 +1,10 @@
-import { Box, LinearProgress, Stack, Typography } from "@mui/material";
+import { Box, LinearProgress, Stack, Typography } from '@mui/material';
 
-import { useCRUD } from "../hooks/useCRUD";
-import { useGenerateId } from "../hooks/useGenerateId";
-import { API, Element, ElementId, Manager, Settings } from "../types";
-import { ResultsTable } from "./ResultsTable";
+import { useCRUD } from '../hooks/useCRUD';
+import { useGenerateId } from '../hooks/useGenerateId';
+import { API, Element, ElementId, Manager, Settings } from '../types';
+
+import { ResultsTable } from './ResultsTable';
 
 type Props = {
   settings: Settings;
@@ -11,14 +12,11 @@ type Props = {
   manager: Manager;
 };
 
-export function StateComponent({ settings, api, manager }: Props) {
+export function StateComponent({ settings, api, manager }: Readonly<Props>) {
   const { hideResults } = settings;
 
   // Hook to interact with the data
-  const { loading, data, error, add, remove, clear, fetch } = useCRUD<
-    Element,
-    Element[]
-  >({
+  const { loading, data, error, add, remove, clear, fetch } = useCRUD<Element, Element[]>({
     api,
     manager,
   });
@@ -35,13 +33,13 @@ export function StateComponent({ settings, api, manager }: Props) {
     <Stack direction="column" spacing={2} justifyContent="center">
       <Box>
         <span>LOADING: </span>
-        {loading ? <LinearProgress /> : "false"}
+        {loading ? <LinearProgress /> : 'false'}
       </Box>
 
       {error?.message ? (
         <Box>
           <Typography mt={2}>
-            Error: &nbsp;<span>{JSON.stringify(error?.message)}</span>
+            Error: &nbsp;<span>{JSON.stringify(error.message)}</span>
           </Typography>
         </Box>
       ) : null}

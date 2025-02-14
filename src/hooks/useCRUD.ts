@@ -1,25 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { API, Manager } from "../types";
+import { API, Manager } from '../types';
 
 type Props<T, Z> = { api: API<T, Z>; manager: Manager };
 
-export function useCRUD<T = unknown, Z = unknown>({
-  api,
-  manager,
-}: Props<T, Z>) {
+export function useCRUD<T = unknown, Z = unknown>({ api, manager }: Props<T, Z>) {
   type Status = {
     error?: Error;
     data?: Z;
   };
 
-  const {
-    addElementRequest,
-    removeElementRequest,
-    updateElementRequest,
-    removeAllElementsRequest,
-    fetchDataRequest,
-  } = api;
+  const { addElementRequest, removeElementRequest, updateElementRequest, removeAllElementsRequest, fetchDataRequest } =
+    api;
 
   const { addRequest, removeRequest, isNotEmpty } = manager;
 

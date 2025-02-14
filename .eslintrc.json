@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "extends": [
+    "./node_modules/pdf-tools/exports/eslint.json",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": ["react-refresh"],
+  "rules": {
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ],
+    "deprecation/deprecation": "warn",
+    "redundant-type-aliases": "off",
+    "formatjs/no-literal-string-in-jsx": "off",
+    "sonarjs/todo-tag": "warn",
+    "sonarjs/no-nested-functions": "warn"
+
+  }
+}

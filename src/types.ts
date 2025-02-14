@@ -1,6 +1,5 @@
-import uuid from "uuid";
-
-export type ElementId = ReturnType<typeof uuid.v4>;
+// eslint-disable-next-line sonarjs/redundant-type-aliases
+export type ElementId = string;
 export type Element = {
   id: ElementId;
   creationDate: number;
@@ -14,6 +13,7 @@ export type API<T = unknown, Z = unknown> = {
   updateElementRequest: (element: T) => Promise<T>;
 };
 
+// eslint-disable-next-line sonarjs/redundant-type-aliases
 export type ApiRequest = number;
 
 export type Manager = {

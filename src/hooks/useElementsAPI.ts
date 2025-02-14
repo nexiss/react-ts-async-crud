@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+/* eslint-disable no-console */
+import { useEffect, useRef, useState } from 'react';
 
-import { API, Element, ElementId } from "../types";
+import { API, Element, ElementId } from '../types';
 
 // Abstraction to reduce code
 const doReject = (reject: (reason: Error) => void, message: string) => {
@@ -25,9 +26,9 @@ export function useElementsAPI(props?: Props): API<Element, Element[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (withErrors) {
-          doReject(reject, "Something when wrong when adding new element");
+          doReject(reject, 'Something when wrong when adding new element');
         } else {
-          console.log("Adding element to the persistence layer: ", element);
+          console.log('Adding element to the persistence layer: ', element);
           setElements((prev) => [...prev, element]);
           resolve(element);
         }
@@ -39,13 +40,11 @@ export function useElementsAPI(props?: Props): API<Element, Element[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (withErrors) {
-          doReject(reject, "Something when wrong when removing element");
+          doReject(reject, 'Something when wrong when removing element');
         } else {
-          console.log("Removing element from the persistence layer: ", id);
+          console.log('Removing element from the persistence layer: ', id);
           setElements((prev) => {
-            const index = prev.findIndex(
-              (prevElement) => prevElement.id === id
-            );
+            const index = prev.findIndex((prevElement) => prevElement.id === id);
 
             if (index >= 0) {
               const newArr = [...prev];
@@ -65,14 +64,10 @@ export function useElementsAPI(props?: Props): API<Element, Element[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (withErrors) {
-          doReject(reject, "Something went wrong when updating element");
+          doReject(reject, 'Something went wrong when updating element');
         } else {
-          console.log("Updating element to the persistence layer: ", element);
-          setElements((prev) =>
-            prev.map((prevElement) =>
-              prevElement.id === element.id ? element : prevElement
-            )
-          );
+          console.log('Updating element to the persistence layer: ', element);
+          setElements((prev) => prev.map((prevElement) => (prevElement.id === element.id ? element : prevElement)));
           resolve(element);
         }
       }, delay);
@@ -83,9 +78,9 @@ export function useElementsAPI(props?: Props): API<Element, Element[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (withErrors) {
-          doReject(reject, "Something went wrong when removing all elements");
+          doReject(reject, 'Something went wrong when removing all elements');
         } else {
-          console.log("Removing all elements", "(" + elements.length + ")");
+          console.log('Removing all elements', '(' + elements.length + ')');
           setElements([]);
           resolve();
         }
@@ -103,9 +98,9 @@ export function useElementsAPI(props?: Props): API<Element, Element[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (withErrors) {
-          doReject(reject, "Something went wrong when fetching data");
+          doReject(reject, 'Something went wrong when fetching data');
         } else {
-          console.log("fetching: ", ref.current);
+          console.log('fetching: ', ref.current);
           resolve(ref.current);
         }
       }, delay);

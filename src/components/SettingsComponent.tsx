@@ -1,13 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from '@mui/material';
 
-import { Settings } from "../types";
+import { Settings } from '../types';
 
 type Props = {
   settings: Settings;
   onChange: (settings: Settings) => void;
 };
 
-export function SettingsComponent({ settings, onChange }: Props) {
+export function SettingsComponent({ settings, onChange }: Readonly<Props>) {
   const { withErrors, hideResults, delay } = settings;
 
   return (
@@ -28,9 +28,7 @@ export function SettingsComponent({ settings, onChange }: Props) {
           <input
             type="checkbox"
             defaultChecked={hideResults}
-            onChange={() =>
-              onChange({ ...settings, hideResults: !hideResults })
-            }
+            onChange={() => onChange({ ...settings, hideResults: !hideResults })}
           />
           Hide results while loading
         </label>
@@ -40,9 +38,7 @@ export function SettingsComponent({ settings, onChange }: Props) {
           <input
             type="number"
             value={delay}
-            onChange={(event) =>
-              onChange({ ...settings, delay: Number(event.target.value) })
-            }
+            onChange={(event) => onChange({ ...settings, delay: Number(event.target.value) })}
           />
           Delay for each request
         </label>

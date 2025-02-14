@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { ApiRequest } from "../types";
+import { ApiRequest } from '../types';
 
 export function useRequestManager() {
   // Estado para mantener un registro de las peticiones activas
-  const [activeRequests, setActiveRequests] = useState<Record<number, boolean>>(
-    {}
-  );
+  const [activeRequests, setActiveRequests] = useState<Record<number, boolean>>({});
 
   // Función para agregar una petición al registro activo
   const addRequest = (): ApiRequest => {

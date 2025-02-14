@@ -1,20 +1,10 @@
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import DeleteIcon from "@mui/icons-material/Delete";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import {
-  Fab,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { Fab, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-import { Element, ElementId } from "../types";
+import { Element, ElementId } from '../types';
 
 type Props = {
   data: Element[] | undefined;
@@ -24,37 +14,19 @@ type Props = {
   fetch: () => void;
 };
 
-export function ResultsTable({ data, add, remove, clear, fetch }: Props) {
+export function ResultsTable({ data, add, remove, clear, fetch }: Readonly<Props>) {
   return (
     <>
       <Stack direction="row" spacing={2} justifyContent="center">
-        <Fab
-          variant="extended"
-          size="small"
-          color="primary"
-          aria-label="fetch"
-          onClick={fetch}
-        >
+        <Fab variant="extended" size="small" color="primary" aria-label="fetch" onClick={fetch}>
           <RefreshIcon />
           Fetch
         </Fab>
-        <Fab
-          variant="extended"
-          size="small"
-          color="primary"
-          aria-label="add"
-          onClick={add}
-        >
+        <Fab variant="extended" size="small" color="primary" aria-label="add" onClick={add}>
           <AddIcon />
           Add
         </Fab>
-        <Fab
-          variant="extended"
-          size="small"
-          color="primary"
-          aria-label="add"
-          onClick={clear}
-        >
+        <Fab variant="extended" size="small" color="primary" aria-label="add" onClick={clear}>
           <ClearIcon />
           Clear
         </Fab>
@@ -73,10 +45,7 @@ export function ResultsTable({ data, add, remove, clear, fetch }: Props) {
             </TableHead>
             <TableBody>
               {data.map((element, i) => (
-                <TableRow
-                  key={element.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
+                <TableRow key={element.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell component="th" scope="row">
                     {i + 1}
                   </TableCell>
